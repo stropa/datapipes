@@ -41,7 +41,7 @@ public class GraphiteSender implements DataSender {
     private void init() {
         try {
             conn = new Socket(host, port);
-            logger.debug("Created Socket to " + conn.toString());
+            logger.trace("Created Socket to " + conn.toString());
             dos = new DataOutputStream(conn.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();

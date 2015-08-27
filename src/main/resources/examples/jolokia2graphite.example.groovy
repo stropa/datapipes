@@ -1,3 +1,5 @@
+package examples
+
 import org.springframework.scheduling.support.CronTrigger
 import org.stropa.data.bridge.jolokia.SimpleDataBridge
 import org.stropa.data.collect.jolokia.JolokiaCollector
@@ -22,7 +24,8 @@ beans {
     jolokia2MyHostedGraphite(SimpleDataBridge) {
         collector = myCollector
         sender = mySender
-        transformer = new KeyReplaceTransformer("73a6d152-3d94-4803-9811-d37c7b7bfc2f")
+        transformer = new KeyReplaceTransformer()
+        transformer.prefix = "73a6d152-3d94-4803-9811-d37c7b7bfc2f"
     }
 
     myTask(DataTransferTask) {

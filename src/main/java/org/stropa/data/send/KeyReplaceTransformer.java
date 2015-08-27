@@ -8,17 +8,11 @@ import java.util.Map;
 
 public class KeyReplaceTransformer implements DataTransformer {
 
-    private String prefix;
-    private String suffix;
+    private String prefix = "";
+    private String suffix = "";
     private String[] toReplace;
     private String[] toReplaceWith;
 
-    public KeyReplaceTransformer(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public KeyReplaceTransformer() {
-    }
 
     @Override
     public Map<String, Object> transform(Map<String, Object> data) {
