@@ -56,3 +56,11 @@ beans {
 *Here's a picture instead of 1024 words:*
 ![diagram](https://github.com/stropa/datapipes/blob/master/src/main/resources/docs/overview.png)
 
+# Features
+## Collectors
+* Jolokia (with some additional custom Authenticator)
+* that's it for now
+
+## Senders
+* Graphite
+* InfluxDB
