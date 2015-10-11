@@ -8,7 +8,6 @@ import org.jolokia.client.request.J4pReadRequest;
 import org.jolokia.client.request.J4pReadResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.stropa.data.bridge.jolokia.Config;
 import org.stropa.data.collect.DataCollector;
 import org.stropa.data.collect.DataRequest;
 

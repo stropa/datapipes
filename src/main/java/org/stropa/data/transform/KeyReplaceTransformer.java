@@ -1,4 +1,4 @@
-package org.stropa.data.send;
+package org.stropa.data.transform;
 
 import org.apache.commons.lang.StringUtils;
 import org.stropa.data.DataTransformer;
@@ -6,10 +6,13 @@ import org.stropa.data.DataTransformer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.lang.StringUtils.replaceEach;
+
 public class KeyReplaceTransformer implements DataTransformer {
 
     private String prefix = "";
     private String suffix = "";
+    private int trimTo = Integer.MAX_VALUE;
     private String[] toReplace;
     private String[] toReplaceWith;
 
@@ -18,7 +21,7 @@ public class KeyReplaceTransformer implements DataTransformer {
     public Map<String, Object> transform(Map<String, Object> data) {
         Map<String, Object> result = new HashMap<String, Object>();
         for (String key : data.keySet()) {
-            result.put(prefix + StringUtils.replaceEach(key, toReplace, toReplaceWith) + suffix
+            result.put(prefix +  replaceEach(key, toReplace, toReplaceWith) + suffix
                     , data.get(key));
         }
         return result;
@@ -57,5 +60,13 @@ public class KeyReplaceTransformer implements DataTransformer {
 
     public void setToReplaceWith(String[] toReplaceWith) {
         this.toReplaceWith = toReplaceWith;
+    }
+
+    public int getTrimTo() {
+        return trimTo;
+    }
+
+    public void setTrimTo(int trimTo) {
+        this.trimTo = trimTo;
     }
 }

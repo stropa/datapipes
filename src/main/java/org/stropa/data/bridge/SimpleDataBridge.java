@@ -1,11 +1,11 @@
-package org.stropa.data.bridge.jolokia;
+package org.stropa.data.bridge;
 
 import org.stropa.data.DataTransformer;
-import org.stropa.data.bridge.DataBridge;
 import org.stropa.data.collect.DataCollector;
 import org.stropa.data.collect.DataRequest;
 import org.stropa.data.send.DataSender;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -14,7 +14,7 @@ public class SimpleDataBridge implements DataBridge {
     private Properties config;
     private DataCollector collector;
     private DataSender sender;
-    private DataTransformer transformer;
+    private List<DataTransformer> transformers;
 
 
     public SimpleDataBridge() {
@@ -24,9 +24,11 @@ public class SimpleDataBridge implements DataBridge {
     public void collectAndSend(DataRequest request) {
 
         Map<String, Object> data = collector.collect(request);
-        if (transformer != null) {
+
+        for (DataTransformer transformer : transformers) {
             data = transformer.transform(data);
         }
+
         sender.sendData(data);
 
     }
@@ -57,11 +59,11 @@ public class SimpleDataBridge implements DataBridge {
         this.sender = sender;
     }
 
-    public DataTransformer getTransformer() {
-        return transformer;
+    public List<DataTransformer> getTransformers() {
+        return transformers;
     }
 
-    public void setTransformer(DataTransformer transformer) {
-        this.transformer = transformer;
+    public void setTransformers(List<DataTransformer> transformers) {
+        this.transformers = transformers;
     }
 }

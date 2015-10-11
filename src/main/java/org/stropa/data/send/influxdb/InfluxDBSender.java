@@ -1,7 +1,8 @@
 package org.stropa.data.send.influxdb;
 
 import org.influxdb.InfluxDB;
-import org.influxdb.dto.Serie;
+import org.influxdb.dto.BatchPoints;
+import org.influxdb.dto.Point;
 import org.stropa.data.send.DataSender;
 
 import java.util.Map;
@@ -15,6 +16,30 @@ public class InfluxDBSender implements DataSender {
 
     @Override
     public Object sendData(Map<String, Object> data) {
+
+        BatchPoints batchPoints = BatchPoints
+                .database(databaseName)//.tag("async", "true").retentionPolicy("default").consistency(ConsistencyLevel.ALL)
+                .build();
+
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            Point point;
+            if (Map.class.isAssignableFrom(entry.getValue().getClass())) {
+                point = Point.measurement(entry.getKey()).fields((Map<String, Object>) entry.getValue())
+                        .build();
+            } else {
+                point = Point.measurement(entry.getKey()).field("value", entry.getValue()).build();
+            }
+            batchPoints.point(point);
+        }
+
+        influxDB.write(batchPoints);
+        return null;
+    }
+
+
+    // for older influxdb-java versions
+    //@Override
+    /*public Object sendData(Map<String, Object> data) {
         Serie[] series = new Serie[data.size()];
         int i = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
@@ -28,8 +53,7 @@ public class InfluxDBSender implements DataSender {
 
 
         return null;
-    }
-
+    }*/
 
     public InfluxDB getInfluxDB() {
         return influxDB;

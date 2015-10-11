@@ -3,6 +3,7 @@ apply plugin: 'java'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 task fatJar(type: Jar) {
@@ -27,7 +28,7 @@ dependencies {
     compile 'org.springframework:spring-beans:4.2.0.RELEASE'
     compile 'org.codehaus.groovy:groovy:2.4.4'
     compile 'ch.qos.logback:logback-classic:1.0.9'
-    compile 'org.influxdb:influxdb-java:1.3'
+    compile 'org.influxdb:influxdb-java:2.0-SNAPSHOT'
     compile 'commons-lang:commons-lang:2.5'
 
 

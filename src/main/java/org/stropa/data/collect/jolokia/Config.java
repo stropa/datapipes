@@ -1,4 +1,4 @@
-package org.stropa.data.bridge.jolokia;
+package org.stropa.data.collect.jolokia;
 
 public interface Config {
 
