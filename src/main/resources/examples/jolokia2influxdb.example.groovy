@@ -17,7 +17,7 @@ beans {
     myCollector(JolokiaCollector) {
         jolokiaUrl = 'http://localhost:8989/payment/jmx'
         authenticator = new CustomHeaderDigestAuthenticator()
-        authenticator.secret = 'Scnsdsuigsg3g36w76s78'
+        authenticator.secret = 'secret'
     }
 
     influxDBSender(InfluxDBSender) {
@@ -26,7 +26,7 @@ beans {
     }
 
     keyReplaceTransformer(KeyReplaceTransformer) {
-        toReplace = ["metrics:name=\"",':', '=', ".", "(", ")", ",", "\"", "\\", "?", "*", "'", "<", ">"]
+        toReplace = ["metrics_name_",':', '=', ".", "(", ")", ",", "\"", "\\", "?", "*", "'", "<", ">"]
         toReplaceWith = ["", "_", "_", "_", "_", "_", "_", "_", "_", "_", "star", "", "le", "ge"]
         trimTo = 80
     }

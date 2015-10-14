@@ -54,6 +54,7 @@ public class JolokiaCollector implements DataCollector {
                 .user(jolokiaAuthUser)
                 //.password(properties.getProperty(Config.JOLOKIA_AUTH_PASSWORD))
                 .authenticator(authenticator)
+                .useProxyFromEnvironment()
                 .build();
     }
 
